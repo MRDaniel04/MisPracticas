@@ -4,7 +4,7 @@
 
 ## Características
 
-- **Lenguajes utilizados**: C, Assembly, Prolog, Java.
+- **Lenguajes utilizados**: C, Assembly, Prolog, Java, Python.
 - **Contenido**: Las prácticas incluyen ejercicios que abarcan tanto conceptos básicos como avanzados, representando una muestra de mi evolución y aprendizaje en el campo de la programación.
 - **Estructura**: El repositorio está organizado en carpetas por lenguaje de programación, facilitando la navegación y la visualización de cada trabajo según el lenguaje utilizado.
 
