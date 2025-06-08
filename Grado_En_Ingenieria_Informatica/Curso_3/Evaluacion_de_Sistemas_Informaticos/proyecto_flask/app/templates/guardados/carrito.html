@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito — Muralia</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='carrito.css') }}">
+  <link rel="website icon" type="image/png" href="{{ url_for('static', filename='logoMuralia.png') }}">
+</head>
+<body>
+  <div class="panel">
+    <div class="content left">
+      <img src="{{ url_for('static', filename='logolargoMuralia.png') }}" alt="Logo de Muralia">
+    </div>
+    <div class="line"></div>
+    <div class="content right">
+      <h1>Carrito</h1>
+      <div id="cart-items" class="cart-items">
+        <!-- Los productos del carrito se cargarán aquí -->
+      </div>
+      <div class="cart-summary">
+        <p id="total">Total: $0.00</p>
+        <button class="checkout-button">Finalizar compra</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/api/carrito')
+        .then(res => res.json())
+        .then(data => {
+          const cartItems = document.getElementById('cart-items');
+          cartItems.innerHTML = '';
+
+          let total = 0;
+          data.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'cart-item';
+            itemDiv.innerHTML = `
+              <span>${item.nombre} (x${item.cantidad})</span>
+              <span>$${(item.precio * item.cantidad).toFixed(2)}</span>
+            `;
+            total += item.precio * item.cantidad;
+            cartItems.appendChild(itemDiv);
+          });
+
+          document.getElementById('total').textContent = `Total: $${total.toFixed(2)}`;
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('cart-items').innerHTML = '<p>No se pudo cargar el carrito.</p>';
+        });
+    });
+  </script>
+</body>
+</html>

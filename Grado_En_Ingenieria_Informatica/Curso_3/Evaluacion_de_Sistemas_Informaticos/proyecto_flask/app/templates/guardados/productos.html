@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos — Muralia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='iniciarSesion.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='productos.css') }}">
+    <link rel="website icon" type="image/png" href="{{ url_for('static', filename='logoMuralia.png') }}">
+</head>
+<body>
+    <div class="panel">
+        <!-- Lado izquierdo: logo -->
+        <div class="content left">
+            <img src="{{ url_for('static', filename='logolargoMuralia.png') }}" alt="Logo de Muralia">
+        </div>
+        <div class="line"></div>
+        <!-- Lado derecho: listado de productos -->
+        <div class="content right">
+            <h1>Productos</h1>
+            <ul id="product-list" class="product-list">
+                <!-- Se rellena vía JS -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('/api/productos')
+            .then(res => {
+                if (!res.ok) throw new Error('Error al obtener productos');
+                return res.json();
+            })
+            .then(data => {
+                const ul = document.getElementById('product-list');
+                ul.innerHTML = '';
+                data.forEach(prod => {
+                    const li = document.createElement('li');
+                    li.className = 'product-item';
+                    li.innerHTML = `
+                        <img src="${prod.image_url}" alt="${prod.title}" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">${prod.title}</h3>
+                            <p class="product-artist">Artista: ${prod.artist}</p>
+                            <p class="product-description">${prod.description}</p>
+                            <div class="product-details">
+                                <span class="product-price">Precio: ${prod.price} €</span>
+                                <span class="product-stock">Stock: ${prod.stock}</span>
+                            </div>
+                            <button class="add-to-cart" data-product-id="${prod.id}">Añadir al carrito</button>
+                        </div>
+                    `;
+                    ul.appendChild(li);
+                    // Añadir funcionalidad al botón de carrito
+                    const btn = li.querySelector('.add-to-cart');
+                    btn.addEventListener('click', () => {
+                      fetch('/api/cart/add', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'same-origin',
+                        body: JSON.stringify({
+                          product_id: prod.id,
+                          quantity: 1
+                        })
+                      })
+                      .then(response => {
+                        if (response.status === 401) {
+                          alert('Debes iniciar sesión para añadir al carrito');
+                          window.location.href = '/login';
+                          return;
+                        }
+                        if (!response.ok) return response.json().then(err => Promise.reject(err.message));
+                        return response.json();
+                      })
+                      .then(() => alert('¡Producto añadido al carrito!'))
+                      .catch(err => alert('Error: ' + err));
+                    });
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById('product-list').innerHTML = '<li class="product-item">No se pudieron cargar los productos.</li>';
+            });
+    });
+    </script>
+</body>
+</html>

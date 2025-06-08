@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú — Muralia</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
+  <link rel="website icon" type="image/png" href="{{ url_for('static', filename='logoMuralia.png') }}">
+</head>
+<body>
+  <div class="panel">
+    <div class="content left">
+	<img class="logo" src="../static/logoMuralia.png" alt="Logo de Muralia Valladolid" />
+            <div class="buttons">
+		<a href="{{url_for('menu_page')}}">
+        		<div class="btn-container selected">
+                        	<svg class="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                			<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    			d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+            			</svg>
+            			<span class="btn-text">Menu</span>
+        		</div>
+    		</a>
+    		<a href="{{url_for('carrito_page')}}">
+        		<div class="btn-container">
+                         	<svg class="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+            			</svg>
+            			<span class="btn-text">Carrito</span>
+        		</div>
+    		</a>
+    		<a href="{{url_for('pedidos_page')}}">
+        		<div class="btn-container">
+                        	<svg class="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5V3a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v18a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-2m0-13H9.5a1.5 1.5 0 0 0 0 3h5a1.5 1.5 0 0 1 0 3h-5m5 4h-5m5 4h-5M5 5h2m-2 4h2m-2 4h2"/>
+            			</svg>
+            			<span class="btn-text">Pedidos</span>
+        		</div>
+    		</a>
+            </div>
+    </div>
+    <div class="content right">
+      <h1>Menú</h1>
+      <div id="menu-info">
+        <h2 id="store-name">Cargando...</h2>
+        <p id="store-description"></p>
+      </div>
+      <ul id="category-list" class="categories-list">
+        <!-- Las categorías se cargarán aquí -->
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/api/menu')
+        .then(res => {
+          if (!res.ok) throw new Error('Error al obtener el menú');
+          return res.json();
+        })
+        .then(data => {
+          document.getElementById('store-name').textContent = data.store_name;
+          document.getElementById('store-description').textContent = data.store_description;
+          const ul = document.getElementById('category-list');
+          ul.innerHTML = '';
+          data.categories.forEach(cat => {
+            const li = document.createElement('li');
+            const btn = document.createElement('button');
+            btn.className = 'category-button';
+            btn.textContent = cat.name;
+            btn.addEventListener('click', () => {
+              window.location.href = '/productos';
+            });
+            li.appendChild(btn);
+            ul.appendChild(li);
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('store-name').textContent = 'No se pudo cargar el menú';
+        });
+    });
+  </script>
+</body>
+</html>

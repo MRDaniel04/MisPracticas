@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito — Muralia</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
+  <link rel="website icon" type="image/png" href="{{ url_for('static', filename='logoMuralia.png') }}">
+</head>
+<body>
+  <div class="panel">
+    <div class="content left">
+        <img class="logo" src="../static/logoMuralia.png" alt="Logo de Muralia Valladolid" />
+            <div class="buttons">
+                <a href="{{url_for('menu_page')}}">
+                        <div class="btn-container">
+                                <svg class="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+                                </svg>
+                                <span class="btn-text">Menu</span>
+                        </div>
+                </a>
+                <a href="{{url_for('carrito_page')}}">
+                        <div class="btn-container selected">
+                                <svg class="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+                                </svg>
+                                <span class="btn-text">Carrito</span>
+                        </div>
+                </a>
+                <a href="{{url_for('pedidos_page')}}">
+                        <div class="btn-container">
+                                <svg class="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5V3a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v18a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-2m0-13H9.5a1.5 1.5 0 0 0 0 3h5a1.5 1.5 0 0 1 0 3h-5m5 4h-5m5 4h-5M5 5h2m-2 4h2m-2 4h2"/>
+                                </svg>                                                                                                                                          <span class="btn-text">Pedidos</span>
+                        </div>
+                </a>                                                                                                                                        </div>
+    	</div>
+    <div class="content right">
+      <h1>Carrito</h1>
+      <div id="cart-items" class="cart-items">
+        <!-- Los productos del carrito se cargarán aquí -->
+      </div>
+      <div class="cart-summary">
+        <p id="total">Total: $0.00</p>
+        <button class="checkout-button">Finalizar compra</button>
+      </div>
+    </div>
+  </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartItemsEl = document.getElementById('cart-items'); // Renombrado para claridad
+      const totalEl = document.getElementById('total');
+      const checkoutButton = document.querySelector('.checkout-button'); // Selecciona el botón
+
+      // Función para cargar y mostrar el carrito (tu código existente)
+      function loadCart() {
+        fetch('/api/carrito') // Asume que el endpoint de carrito está en /api/carrito
+          .then(res => {
+            if (!res.ok) {
+              // Si la respuesta no es OK (ej. 401 si no está logueado), maneja el error
+              if (res.status === 401) {
+                 cartItemsEl.innerHTML = '<p>Debes iniciar sesión para ver tu carrito.</p>';
+                 totalEl.textContent = 'Total: $0.00';
+                 checkoutButton.disabled = true; // Deshabilitar botón si no está logueado
+                 return Promise.reject(new Error('Usuario no autenticado')); // Detiene el .then() siguiente
+              }
+              return res.json().then(errData => Promise.reject(errData)); // Intenta obtener error del JSON
+            }
+            return res.json();
+          })
+          .then(data => { 
+	    cartItemsEl.innerHTML = ''; // Limpiar antes de añadir nuevos
+	    const itemsToDisplay = data.cart_items; // Cambiado de data.cart_items a data.items
+            let calculatedTotal = 0; // Usar una variable local para calcular
+
+            if (!itemsToDisplay || itemsToDisplay.length === 0) { // Verificación más robusta
+	      cartItemsEl.innerHTML = '<p>Tu carrito está vacío.</p>';
+              totalEl.textContent = 'Total: $0.00';
+              checkoutButton.disabled = true; // Deshabilitar si el carrito está vacío
+              return;
+            }
+
+            checkoutButton.disabled = false; // Habilitar si hay items
+
+            itemsToDisplay.forEach(item => {
+              const itemDiv = document.createElement('div');
+              itemDiv.className = 'cart-item';
+              // Asegúrate que item.image_url, item.title, etc., existan y sean correctos
+              // según la respuesta de tu API /api/carrito
+              itemDiv.innerHTML = `
+                <img src="${item.image_url || '#'}" alt="${item.title || 'Producto'}" class="cart-item-image">
+                <span>${item.title || 'Producto Desconocido'} (x${item.quantity || 0})</span>
+                <span>$${((item.price || 0) * (item.quantity || 0)).toFixed(2)}</span>
+              `;
+              calculatedTotal += (item.price || 0) * (item.quantity || 0);
+              cartItemsEl.appendChild(itemDiv);
+            });
+
+            // Usar el total_price del backend si está disponible y es más preciso,
+            // o el calculado localmente. El backend es más fiable.
+            totalEl.textContent = `Total: $${(data.total_price !== undefined ? data.total_price : calculatedTotal).toFixed(2)}`;
+          })
+          .catch(err => {
+            console.error("Error al cargar carrito:", err);
+            if (err.message !== 'Usuario no autenticado') { // No mostrar este mensaje si ya se mostró el de login
+                cartItemsEl.innerHTML = `<p>No se pudo cargar el carrito. ${err.message || ''}</p>`;
+            }
+            checkoutButton.disabled = true;
+          });
+      }
+
+      // Cargar el carrito al inicio
+      loadCart();
+
+      // --- NUEVO: Event Listener para el botón de Finalizar Compra ---
+      checkoutButton.addEventListener('click', () => {
+        console.log('Botón Finalizar Compra clickeado');
+        checkoutButton.disabled = true; // Deshabilitar durante la petición
+        console.log('checkoutbutton disabled');
+	checkoutButton.textContent = 'Procesando...';
+
+        fetch('/api/checkout', { // Llama al endpoint POST de tu backend
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json' // Aunque no envíes body, es buena práctica
+            // Las cookies de sesión se envían automáticamente por el navegador
+          }
+        })
+        .then(res => {
+          if (!res.ok) {
+            // Si hay un error en el backend (ej: stock insuficiente, error 500)
+            return res.json().then(errData => {
+              throw new Error(errData.message || 'Error desconocido al procesar la compra.');
+            });
+          }
+          return res.json(); // Espera la respuesta JSON del backend
+        })
+        .then(data => {
+          // Éxito en el checkout
+          console.log('Respuesta del checkout:', data);
+          alert(`¡Compra finalizada con éxito! ID del pedido: ${data.order_id}`);
+          // Podrías redirigir a la página de pedidos o mostrar un mensaje de éxito más elaborado
+          // y luego recargar el carrito (que debería estar vacío)
+          cartItemsEl.innerHTML = '<p>¡Gracias por tu compra! Tu carrito ha sido vaciado.</p>';
+          totalEl.textContent = 'Total: $0.00';
+          checkoutButton.textContent='Finalizar compra';
+	  // O redirigir: window.location.href = '/pedidos'; (si tienes una página HTML para pedidos)
+        })
+        .catch(err => {
+          // Error durante el checkout
+          console.error('Error en el checkout:', err);
+          alert(`Error al finalizar la compra: ${err.message}`);
+          checkoutButton.disabled = false; // Rehabilitar el botón si falló
+          checkoutButton.textContent = 'Finalizar compra';
+        });
+      });
+      // --- FIN DEL NUEVO CÓDIGO ---
+    });
+  </script>
+</body>
+</html>

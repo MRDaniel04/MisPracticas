@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos — Muralia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
+    <link rel="website icon" type="image/png" href="{{ url_for('static', filename='logoMuralia.png') }}">
+</head>
+<body>
+    <div class="panel">
+        <!-- Lado izquierdo: logo -->
+        <div class="content left">
+		<img class="logo" src="../static/logoMuralia.png" alt="Logo de Muralia Valladolid" />
+            <div class="buttons">
+                <a href="{{url_for('menu_page')}}">
+                        <div class="btn-container selected">
+                                <svg class="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+                                </svg>
+                                <span class="btn-text">Menu</span>
+                        </div>
+                </a>
+                <a href="{{url_for('carrito_page')}}">
+                        <div class="btn-container">
+                                <svg class="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+                                </svg>
+                                <span class="btn-text">Carrito</span>
+                        </div>
+                </a>
+                <a href="{{url_for('pedidos_page')}}">
+                        <div class="btn-container">
+                                <svg class="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5V3a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v18a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-2m0-13H9.5a1.5 1.5 0 0 0 0 3h5a1.5 1.5 0 0 1 0 3h-5m5 4h-5m5 4h-5M5 5h2m-2 4h2m-2 4h2"/>
+                                </svg>                                                                                                                                          <span class="btn-text">Pedidos</span>
+                        </div>
+                </a>                                                                                                                                        </div>
+    	</div>
+        <div class="content right">
+            <h1>Productos</h1>
+            <ul id="product-list" class="product-list">
+                <!-- Se rellena vía JS -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('/api/productos')
+            .then(res => {
+                if (!res.ok) throw new Error('Error al obtener productos');
+                return res.json();
+            })
+            .then(data => {
+                const ul = document.getElementById('product-list');
+                ul.innerHTML = '';
+                data.forEach(prod => {
+                    const li = document.createElement('li');
+                    li.className = 'product-item';
+                    li.innerHTML = `
+                        <div>       
+                            <img src="${prod.image_url}" alt="${prod.title}" class="product-image">
+                            <div class="product-info">
+                                <h3 class="product-title">${prod.title}</h3>
+                                <p class="product-artist">Artista: ${prod.artist}</p>
+                                <p class="product-description">${prod.description}</p>
+                                <div class="product-details">
+                                    <span class="product-price">Precio: ${prod.price} €</span>
+                                    <span class="product-stock">Stock: ${prod.stock}</span>
+                                </div>
+                                <button class="add-to-cart" data-product-id="${prod.id}">Añadir al carrito</button>
+                                {% if session['user_type'] == 'admin' %}
+                                    <button class="edit" data-product-id="${prod.id}">Editar</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    `;
+                    ul.appendChild(li);
+                    // Añadir funcionalidad al botón de carrito
+                    const btn = li.querySelector('.add-to-cart');
+                    const btn_edit = li.querySelector('.edit'); 
+                    if(btn_edit){
+                        btn_edit.addEventListener('click', () => {
+                            window.location.href = `/editar?idurl=${prod.id}`;
+                        });
+                    }
+                    else{
+                        console.error('No se encontró el botón con la clase .editar dentro de este li:', li);
+                    }
+                    btn.addEventListener('click', () => {
+                      fetch('/api/cart/add', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'same-origin',
+                        body: JSON.stringify({
+                          product_id: prod.id,
+                          quantity: 1
+                        })
+                      })
+                      .then(response => {
+                        if (response.status === 401) {
+                          alert('Debes iniciar sesión para añadir al carrito');
+                          window.location.href = '/login';
+                          return;
+                        }
+                        if (!response.ok) return response.json().then(err => Promise.reject(err.message));
+                        return response.json();
+                      })
+                      .then(() => alert('¡Producto añadido al carrito!'))
+                      .catch(err => alert('Error: ' + err));
+                    });
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById('product-list').innerHTML = '<li class="product-item">No se pudieron cargar los productos.</li>';
+            });
+    });
+    </script>
+</body>
+</html>

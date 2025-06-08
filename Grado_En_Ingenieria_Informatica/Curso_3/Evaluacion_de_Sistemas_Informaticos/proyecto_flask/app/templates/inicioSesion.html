@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="../static/registro_login.css">
+    <link rel="website icon" type=png href="../static/logoMuralia.png">
+</head>
+<body>
+    <div class="panel">
+        <div class="content left">
+            <img src="../static/logolargoMuralia.png" alt="Logo de Muralia Valladolid">
+        </div>
+        <div class="line"></div> 
+        <div class="content right">
+            <div class="opciones">
+                <div class="horizontal">
+                    <a href="{{url_for('auth.check_login')}}">
+                        <label id="iniciarSesion"> INICIAR SESIÓN </label>    
+                    </a>
+                    <a href="{{url_for('auth.check_registro')}}">
+                        <label id="crearCuentaIniciarSesion"> CREAR CUENTA </label>    
+                    </a>
+                </div>
+            </div>
+            <form method='POST' action="{{url_for('auth.check_login')}}" id="loginForm">
+                <div class="formulario">
+                    <label for="email"> Correo Electrónico </label>
+                    <input type="text" id="email" name="email" value="{{submitted_email | default('')}}" required>
+                </div> 
+                <div class="formulario">
+                    <label for="contrasenya"> Contraseña </label>
+                    <input type="password" id="contrasenya" name="contrasenya" value="{{submitted_contrasenya | default('')}}" required>
+                </div>
+		<div class="mensaje-error">
+			{% with messages = get_flashed_messages(with_categories=true) %}
+                	{% if messages %}
+                        	{% for category, message in messages %}
+                                	<div class="alert alert-{{ category }}" style="color:red">
+                                        	{{ message }}
+                               		 </div>
+                        	{% endfor %}
+                	{% endif %}
+                	{% endwith %}
+		</div>
+            	<div class="boton">
+			<button type="submit" id="loginButton"> INICIAR SESIÓN </button>
+            	</div>
+	    </form>
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const loginForm = document.getElementById('loginForm');
+        const loginButton = document.getElementById('loginButton');
+    
+        
+        if (loginForm && loginButton) {
+            loginForm.addEventListener('submit', async (event) => {
+                console.log("entra aqui 1");
+                event.preventDefault(); 
+    
+                const emailInput = document.getElementById('email'); 
+                const passwordInput = document.getElementById('contrasenya'); 
+    
+                if (!emailInput || !passwordInput) {
+                    console.error("No se encontraron los campos de email o contraseña en el DOM.");
+                    return;
+                }
+    
+                const emailValue = emailInput.value;
+                const passwordValue = passwordInput.value;
+    
+                
+                const data = {
+                    username: emailValue,    
+                    password: passwordValue  
+                };
+    
+                loginButton.disabled = true;
+    
+                try {
+                    
+                    const url = loginForm.action;
+    
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+    
+                    const responseData = await response.json(); 
+    
+                    if (response.ok) { // Status 200-299 
+    
+                        if (responseData.success && responseData.message) {
+
+                        }
+                         console.log("Login exitoso, datos recibidos:", responseData);
+			 window.location.href='/menu'
+    
+                    } else {
+                        let errorMessage = `Error ${response.status}: `;
+                        if (responseData && responseData.message) {
+                            errorMessage += responseData.message;
+                        } else {
+                            errorMessage += response.statusText; 
+                        }
+                    }
+    
+                } catch (error) {
+                    console.error('Error en la petición de login:', error);
+                } finally {
+                    loginButton.disabled = false;
+                    loginButton.textContent = 'INICIAR SESIÓN'; 
+                }
+            });
+        } else {
+            console.error("El formulario de login o sus componentes no se encontraron en el DOM.");
+        }
+    });
+    </script>
+</body>
+</html>
+

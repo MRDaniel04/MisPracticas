@@ -1,0 +1,398 @@
+/* Estilos globales */
+body {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background: linear-gradient(to bottom, #500080, #f8f8f8);
+    height: 100vh;
+}
+
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.panel {
+    border-radius: 15px;
+    display: flex;
+    height: 90vh;
+    width: 90vw;
+}
+
+.left {
+    width: 250px;
+    height: 95%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background-color: #34495e;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.horizontal {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.right {
+    background: #ffffff;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    flex: 1;
+    height: 95%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    overflow-y: auto;
+    min-width :0;
+}
+
+/* Elementos anidados */
+.left img {
+    width: 150px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/*.right img {
+    max-width: 100%;
+    height: auto;
+}*/
+
+/* Botones y componentes interactivos */
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px; /* Ajusta tu padding deseado */
+    width: 100%; /* Ocupa todo el ancho del 'a' */
+    box-sizing: border-box; /* El padding no aumenta el tamaño total */
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer; /* Indica que es clicable */
+    background-color: transparent; /* Fondo por defecto (o tu gris oscuro si prefieres) */
+    color: #ecf0f1; /* Color de texto/icono por defecto (ajusta) */
+    /* Quita cualquier margin o border-radius si no los quieres aquí */
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.btn-container svg { /* O usa .icon si le diste esa clase */
+    width: 24px;
+    height: 24px;
+    margin-right: 15px; /* Espacio entre icono y texto */
+    flex-shrink: 0;
+    stroke: currentColor; /* Usa el color del texto del contenedor */
+}
+
+.btn-text { /* Clase que le dimos al span */
+    font-size: 16px;
+    /* Añade otros estilos de fuente si es necesario */
+}
+
+.btn-container:hover {
+    background-color: #3d556b;
+}
+
+.btn-container.selected {
+    background-color: #2980b9;
+}
+
+.btn-container img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.buttons a {
+    text-decoration: none;
+    color: inherit; 
+    display: block; 
+}
+
+.buttons a:visited {
+    color: white;
+}
+
+/* Tipografía */
+h1 {
+    font-size: 32px;
+    color: #2c3e50;
+    margin: 0;
+}
+
+h2 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin: 0;
+}
+
+/* Estilos del carrito */
+.cart-items {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.cart-item:hover {
+    background-color: rgba(211, 211, 203, 0.5);
+    transform: translateY(-2px);
+}
+
+.cart-item span {
+    font-size: 1rem;
+    color: #333;
+}
+
+.cart-item-image{
+    width: 50px;
+    height: 50px; 
+}
+
+.cart-summary {
+    margin-top: 30px;
+    text-align: left;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+.checkout-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #6b757b;
+    color: white;
+    border: none;
+    border-radius: 35px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+    background-color: #5a6361;
+}
+
+/*Estilos de menu */
+.product-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 0 4px;
+}
+
+.product-artist {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 0 8px;
+}
+
+.product-description {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.product-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.product-price {
+    font-weight: bold;
+}
+
+.product-stock {
+    color: #999;
+}
+
+/* Category button styles */
+.category-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #6b757b;
+    color: white;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+}
+
+.category-button:hover {
+    background-color: #5a6361;
+}
+
+/*Estilos de productos */
+.product-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.product-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.product-item:hover {
+    background-color: rgba(211, 211, 203, 0.5);
+    transform: translateY(-2px);
+}
+
+.product-image {
+    width: 120px;
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.product-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.product-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 0 4px;
+}
+
+.product-artist {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 0 8px;
+}
+
+.product-description {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.product-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.product-price {
+    font-weight: bold;
+}
+
+.product-stock {
+    color: #999;
+}
+
+/* Estilos de edicion de productos */
+.form-container {
+    background-color: #ffffff; 
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px; 
+    box-sizing: border-box;
+}
+
+.form-container h1 {
+    color: #333; 
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 24px; 
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="file"] { 
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.form-actions {
+    margin-top: 25px;
+    display: flex; 
+    justify-content: space-between;
+    gap: 15px; 
+}
+
+.btn {
+    padding: 12px 20px; 
+    font-size: 16px;    
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    flex-grow: 1; 
+    transition: background-color 0.3s ease;
+}
+
+.btn-confirm {
+    background-color: #28a745; 
+    color: white;
+}
+.btn-confirm:hover {
+    background-color: #218838;
+}
+
+.btn-cancel {
+    background-color: #6c757d;
+    color: white;
+}
+.btn-cancel:hover {
+    background-color: #5a6268;
+}

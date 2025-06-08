@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    <link rel="stylesheet" href="../static/registro_login.css">
+    <link rel="website icon" type="png" href="../static/logoMuralia.png">
+</head>
+<body>
+    <div class="panel">
+        <div class="content left">
+            <img src="../static/logolargoMuralia.png" alt="Logo de Muralia Valladolid">
+        </div>
+        <div class="line"></div> 
+        <div class="content right">
+            <div class="opcionesCrearCuenta">
+                <div class="horizontal">
+                    <a href="{{url_for('auth.check_login')}}">
+                        <label id="iniciarSesionCrearCuenta"> INICIAR SESIÓN </label>    
+                    </a>
+                    <a href="{{url_for('auth.check_registro')}}">
+                        <label id="crearCuenta"> CREAR CUENTA </label>    
+                    </a>
+                </div>
+            </div>
+            <form method= 'POST' action="{{url_for('auth.check_registro')}}">
+                <div class="formularioCrearCuenta">
+                    <label> Nombre </label>
+                    <input class=input type="text" name="usuario" value="{{submitted_usuario | default('')}}" required>
+                </div>
+                <div class="formularioCrearCuenta">
+                    <label> Correo Electrónico </label>
+                    <input class=input type="text" name="email" value="{{submitted_email | default('')}}" required>
+                </div> 
+                <div class="formularioCrearCuenta">
+                    <label> Contraseña </label>
+                    <input class=input type="password" name="contrasenya" value="{{submitted_contrasenya | default('')}}" required>
+                </div>
+		<div class="mensaje-error">	
+			{% with messages = get_flashed_messages(with_categories=true) %}
+                	{% if messages %}
+                        	{% for category, message in messages %}
+                                	<div class="alert alert-{{ category }}" style="color:red">
+                                        	{{ message }}
+                               		 </div>
+                        	{% endfor %}
+                	{% endif %}
+                	{% endwith %}
+		</div>
+            <div class="boton">
+		<button class="crearCuenta"> CREAR CUENTA </button>
+            </div>
+	</form>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

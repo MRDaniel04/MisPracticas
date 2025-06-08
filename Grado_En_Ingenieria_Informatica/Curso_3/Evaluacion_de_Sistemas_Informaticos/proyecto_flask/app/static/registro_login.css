@@ -1,0 +1,248 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background: linear-gradient(to bottom, #500080, #f8f8f8); 
+    height: 100vh;
+}
+
+img {
+    height: 450px;
+    width: 270px; 
+}
+
+h1 {
+    color: #333;
+}
+
+.panel {
+    background: white;
+    border-radius: 15px; 
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6); 
+    text-align: center;
+    height: 550px;
+    width: 850px; 
+    display: flex; 
+    align-items: center;
+    justify-content: space-between; 
+}
+
+.content{
+    flex: 1;
+    text-align: center;
+    align-items: center;
+}
+
+.line {
+    width: 1px; 
+    height: 80%; 
+    background: #aaa; 
+}
+
+.content {
+    flex: 1; 
+    text-align: center;
+}
+
+.left {
+    flex-basis: 35%;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.right{
+    flex-basis: 65%;
+    text-align: left;
+    align-items: center;
+    padding-left: 60px;
+}
+
+.line{
+    width: 2px;
+    background-color: #e0e0e0;
+}
+
+a{
+    text-decoration: none;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.formularioCrearCuenta {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: auto;
+    margin-top: 7px;
+}
+
+.opciones{
+    margin-bottom: 70px;
+}
+
+.opcionesCrearCuenta{
+    margin-bottom: 40px;
+}
+
+.mensaje-error .alert{
+    margin-top:10px;
+}
+
+input{
+    width: 80%;
+    height: 100%;
+    padding: 10px;
+    background-color: rgba(211,211,203,1.00);
+    color: black;
+    border-radius: 5px;
+    border: #000000;
+    margin-bottom: auto;
+    margin-right: 30px;
+    margin-top: 10px;
+    margin-bottom: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease
+}
+
+.inputHorizontal{
+    width: 33%;
+    height: 100%;
+    padding: 10px;
+    background-color: rgba(211,211,203,1.00);
+    color: black;
+    border-radius: 5px;
+    border: #000000;
+    margin-bottom: auto;
+    margin-right: 50px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease
+}
+
+.inputHorizontalPequeño{
+    width: 8%;
+    height: 100%;
+    padding: 10px;
+    background-color: rgba(211,211,203,1.00);
+    color: black;
+    border-radius: 5px;
+    border: #000000;
+    margin-bottom: auto;
+    margin-right: 28px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease
+}
+
+.textoHorizontal{
+    margin-right: 40px;
+    margin-top: 10px;
+}
+
+
+label{
+    font-size: 20px;
+}
+
+
+#iniciarSesion{
+    font-size: 12px;
+    font-weight: bold;
+    color: #2c3e50;
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 10px;
+    margin-right: 20px;
+    margin-bottom: 60px;
+    margin-top: 40px;
+}
+
+#crearCuentaIniciarSesion{
+    font-size: 12px;
+    color: grey;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+#crearCuenta{
+    font-size: 12px;
+    color: #2c3e50;
+    font-weight: bold;
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-top: 40px;
+}
+
+
+#iniciarSesionCrearCuenta{
+    font-size: 12px;
+    color: grey;
+    font-weight: bold;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.crearCuenta{
+    background-color: #6b757b;
+    color: white;
+    border: none;
+    border-radius: 35px;
+    padding: 20px 12px;
+    font-size: 16px;
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    display: block;
+    text-align: center;
+}
+
+button{
+    background-color: #6b757b;
+    color: white;
+    border: none;
+    border-radius: 35px;
+    padding: 20px 12px;
+    font-size: 16px;
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: 210px;
+    margin-bottom: auto;
+    margin-top: 70px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    display: block;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #5a6361; /* Color más oscuro al pasar el ratón */
+}
+
+a{
+    text-decoration: none;
+}
+
+.horizontal {
+    display: flex;
+    justify-content: flex-start;
+    align-items: left;
+}
+

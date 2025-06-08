@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
+    <link rel="website icon" type="image/png" href="{{ url_for('static', filename='logoMuralia.png') }}">
+    <title>Editar Producto</title>
+</head>
+<body>
+    <div class="form-container">
+        <h1>EDITAR PRODUCTO</h1>
+        <div class="form-group">
+            <label for="updateType">Tipo de Actualización:</label>
+            <select id="updateType" name="updateType">
+                <option value="PATCH">Actualizar Parcialmente (PATCH)</option>
+                <option value="PUT">Actualizar Producto al Completo (PUT)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="titulo">Titulo</label>
+            <input type="text" id="titulo" name="titulo" value="{{ producto.titulo if producto else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" value="{{ producto.description if producto else '' }}"required>
+        </div>
+        <div class="form-group">
+            <label for="artista">Artista</label>
+            <input type="text" id="artista" name="artista" value="{{ producto.artista if producto else '' }}"required>
+        </div>
+        <div class="form-group">
+            <label for="precio">Precio</label>
+            <input type="number" id="precio" name="precio" step="0.01" value="{{ producto.precio if producto else '' }}"required>
+        </div>
+        <div class="form-group">
+            <label for="stock">Stock</label>
+            <input type="number" id="stock" name="stock" value="{{ producto.stock if producto else '' }}"required>
+        </div>
+        <div class="form-group">
+            <label for="imagen">Imagen</label>
+            <input type="file" id="imagen" name="imagen">
+        </div>
+
+        <div class="form-actions">
+            <button type="button" id="submitButton" class="btn btn-confirm">Confirmar</button>
+            <a href="{{ url_for('productos_page') }}" class="btn btn-cancel">Cancelar</a>
+        </div>
+        <div id="formFeedback" class="feedback-message" style="display:none;"></div>
+        <input type="hidden" id="productIdUrlHidden" value="{{ producto.idurl if producto else '' }}">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const updateTypeSelect = document.getElementById('updateType');
+            const submitButton = document.getElementById('submitButton');
+            const formFeedbackDiv = document.getElementById('formFeedback');
+            const productIdUrl = document.getElementById('productIdUrlHidden').value;
+
+            const fieldConfig = [
+                {id: 'titulo', name: 'title'},
+                {id: 'description', name: 'description'},
+                {id: 'artista', name: 'artist'},
+                {id: 'precio', name: 'price'},
+                {id: 'stock', name: 'stock'},
+            ];
+            const imageField = 'imagenFile'; 
+            const tiposDeImagenPermitidos = ['image/png', 'image/jpeg']; 
+
+            const imageInputElement = document.getElementById(imageField);
+            const imageFieldErrorFeedbackDiv = document.getElementById('imageFieldErrorFeedback');
+
+            
+            if (imageInputElement) {
+                imageInputElement.setAttribute('accept', tiposDeImagenPermitidos.join(','));
+
+                imageInputElement.addEventListener('change', function(event) {
+                    imageFieldErrorFeedbackDiv.style.display = 'none'; 
+                    imageFieldErrorFeedbackDiv.textContent = '';
+
+                    const archivo = event.target.files[0];
+                    if (archivo) {
+                        if (!tiposDeImagenPermitidos.includes(archivo.type)) {
+                            imageFieldErrorFeedbackDiv.textContent = 'Error: Solo se permiten archivos PNG o JPG.';
+                            imageFieldErrorFeedbackDiv.style.display = 'block';
+                            this.value = ''; 
+                        }
+                    }
+                });
+            }
+
+
+            function updateRequiredStatus() {
+                const selectedHttpMethod = updateTypeSelect.value;
+
+                fieldConfig.forEach(field => { 
+                    const inputElement = document.getElementById(field.id);
+                    const labelElement = document.querySelector(`label[for="${field.id}"]`);
+
+                    if (inputElement && labelElement) {
+                        inputElement.removeAttribute('required'); 
+                        if (selectedHttpMethod === 'PUT') {
+                           inputElement.setAttribute('data-js-required', 'true');
+                        } else {
+                           inputElement.removeAttribute('data-js-required');
+                        }
+
+                        let requiredIndicator = labelElement.querySelector('.required-indicator');
+                        if (selectedHttpMethod === 'PUT') {
+                            if (!requiredIndicator) {
+                                requiredIndicator = document.createElement('span');
+                                requiredIndicator.className = 'required-indicator';
+                                requiredIndicator.textContent = '*';
+                                labelElement.appendChild(requiredIndicator);
+                            }
+                        } else {
+                            if (requiredIndicator) {
+                                labelElement.removeChild(requiredIndicator);
+                            }
+                        }
+                    }
+                });
+                
+                const currentImageInputElement = document.getElementById(imageField); 
+                const imageLabelElement = document.querySelector(`label[for="${imageField}"]`); 
+                if (currentImageInputElement && imageLabelElement) {
+                    currentImageInputElement.removeAttribute('required');
+                    if (selectedHttpMethod === 'PUT') {
+                        currentImageInputElement.setAttribute('data-js-required', 'true');
+                        
+                        let imgRequiredIndicator = imageLabelElement.querySelector('.required-indicator');
+                         if (!imgRequiredIndicator) {
+                            imgRequiredIndicator = document.createElement('span');
+                            imgRequiredIndicator.className = 'required-indicator';
+                            imgRequiredIndicator.textContent = '*';
+                            imageLabelElement.appendChild(imgRequiredIndicator);
+                        }
+                    } else {
+                        currentImageInputElement.removeAttribute('data-js-required');
+                        let imgRequiredIndicator = imageLabelElement.querySelector('.required-indicator');
+                        if (imgRequiredIndicator) {
+                            imageLabelElement.removeChild(imgRequiredIndicator);
+                        }
+                    }
+                }
+            }
+
+            if (updateTypeSelect) {
+                updateRequiredStatus();
+                updateTypeSelect.addEventListener('change', updateRequiredStatus);
+            }
+
+            if (submitButton) {
+                submitButton.addEventListener('click', function() {
+                    formFeedbackDiv.style.display = 'none';
+                    formFeedbackDiv.textContent = '';
+                    formFeedbackDiv.className = 'feedback-message';
+                    if (imageFieldErrorFeedbackDiv) imageFieldErrorFeedbackDiv.style.display = 'none'; 
+                    const httpMethod = updateTypeSelect.value;
+                    const formActionBaseUrl = "/api/productos/";
+                    const fullActionUrl = formActionBaseUrl + productIdUrl;
+
+
+                    if (!productIdUrl) {
+                        showFeedback('Error: No se pudo determinar el ID del producto.', 'error');
+                        return;
+                    }
+
+                    const payloadFormData = new FormData();
+                    let formIsValid = true;
+                    let firstInvalidField = null;
+                    let hasDataToUpdate = false;
+
+                    fieldConfig.forEach(field => { 
+                        const inputElement = document.getElementById(field.id);
+                        if (!inputElement) {
+                            console.warn(`Elemento no encontrado para el ID: ${field.id}`);
+                            return; 
+                        }
+                        const value = inputElement.value;
+
+                        if (httpMethod === 'PUT' && inputElement.getAttribute('data-js-required') === 'true') {
+                            if (value.trim() === '') {
+                                formIsValid = false;
+                                if (!firstInvalidField) firstInvalidField = inputElement;
+                            }
+                        }
+                        if (httpMethod === 'PUT' || (httpMethod === 'PATCH' && value.trim() !== '')) {
+                            payloadFormData.append(field.name, value);
+                             if (value.trim() !== '') hasDataToUpdate = true;
+                        } else if (httpMethod === 'PATCH' && value.trim() === '' && inputElement.dataset.allowEmptyPatch === 'true') {
+                            
+                            payloadFormData.append(field.name, value);
+                            hasDataToUpdate = true;
+                        }
+                    });
+
+                    const currentImageInputElement = document.getElementById(imageField); 
+                    const imageFile = currentImageInputElement.files[0];
+
+                    
+                    if (imageFile && !tiposDeImagenPermitidos.includes(imageFile.type)) {
+                        formIsValid = false;
+                        if (!firstInvalidField) firstInvalidField = currentImageInputElement;
+
+                        if (imageFieldErrorFeedbackDiv) {
+                           imageFieldErrorFeedbackDiv.textContent = 'Error: El archivo seleccionado no es PNG ni JPG. Por favor, corrígelo.';
+                           imageFieldErrorFeedbackDiv.style.display = 'block';
+                        }
+                    }
+
+                    if (formIsValid) {
+                        if (httpMethod === 'PUT' && currentImageInputElement.getAttribute('data-js-required') === 'true' && !imageFile) {
+                            formIsValid = false;
+                            if (!firstInvalidField) firstInvalidField = currentImageInputElement;
+                        }
+                        if (imageFile) { 
+                            payloadFormData.append(currentImageInputElement.name || imageField, imageFile);
+                            hasDataToUpdate = true;
+                        }
+                    }
+
+
+                    if (!formIsValid) {
+                        let mainErrorMessage = 'Por favor, complete todos los campos marcados con * o corrija los errores.';
+                        if (firstInvalidField === currentImageInputElement && imageFile && !tiposDeImagenPermitidos.includes(imageFile.type)) {
+                            mainErrorMessage = 'Error: El tipo de archivo de imagen no es válido (solo PNG/JPG).';
+                        } else if (firstInvalidField === currentImageInputElement && httpMethod === 'PUT' && !imageFile) {
+                             mainErrorMessage = 'Error: El campo de imagen es obligatorio para una actualización completa (PUT).';
+                        }
+                        showFeedback(mainErrorMessage, 'error');
+                        if (firstInvalidField) firstInvalidField.focus();
+                        return;
+                    }
+                    if (httpMethod === 'PATCH' && !hasDataToUpdate) {
+                        showFeedback('Para una actualización parcial (PATCH), debe modificar al menos un campo o subir una nueva imagen.', 'info');
+                    
+                    }
+
+                    console.log("Enviando datos:", httpMethod, fullActionUrl);
+                    for (let [key, value] of payloadFormData.entries()) {
+                        console.log(key, value);
+                    }
+                    fetch(fullActionUrl, {
+                        method: httpMethod,
+                        body: payloadFormData
+                    })
+                    .then(response => {
+                        const status = response.status;
+                        return response.text().then(text => {
+                            try {
+                                return { status, data: JSON.parse(text) };
+                            } catch (e) {
+                                return { status, data: { message: text || "Respuesta no JSON del servidor." } };
+                            }
+                        });
+                    })
+                    .then(({ status, data }) => {
+                        if (status >= 200 && status < 300) {
+                            console.log('Respuesta exitosa:', data);
+                            showFeedback(data.message || 'Producto actualizado exitosamente!', 'success');
+                        
+                        } else {
+                            console.error('Error del servidor:', data);
+                            showFeedback(data.message || data.error || `Error ${status}: No se pudo actualizar.`, 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error en la petición fetch:', error);
+                        showFeedback('Error de red o al procesar la solicitud. Intente nuevamente.', 'error');
+                    });
+                   showFeedback('Simulación de envío: Datos preparados. Ver consola.', 'info'); 
+                });
+            }
+
+            function showFeedback(message, type = 'info') {
+                formFeedbackDiv.textContent = message;
+                formFeedbackDiv.className = 'feedback-message'; 
+                if (type === 'error') {
+                    formFeedbackDiv.classList.add('feedback-error');
+                } else if (type === 'success') {
+                    formFeedbackDiv.classList.add('feedback-success');
+                } else if (type === 'info') {
+                    formFeedbackDiv.classList.add('feedback-info');
+                }
+                formFeedbackDiv.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+    
