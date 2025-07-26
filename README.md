@@ -30,18 +30,19 @@ El repositorio está organizado en carpetas, una por cada año de mi carrera. Pu
 
 ---
 
-## ✨ Estadísticas Dinámicas de GitHub
+## ✨ Actividad y Estadísticas del Proyecto
 
-Estas tarjetas se **actualizan automáticamente** y muestran las estadísticas de mi actividad y los lenguajes más utilizados en mi perfil de GitHub.
+Aquí puedes ver mi gráfico de contribuciones de GitHub y algunas estadísticas que se actualizan automáticamente sobre este repositorio.
 
-<!--
-  Estas son las tarjetas dinámicas. Utilizan tu nombre de usuario (MRDaniel04).
-  Se actualizan solas cada 24 horas para reflejar tu nuevo trabajo. ¡No tienes que hacer nada!
-  Puedes cambiar el tema (theme) por otros como: dark, radical, merko, gruvbox, tokyonight.
--->
 <p align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=MRDaniel04&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&border_radius=10"/>
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=MRDaniel04&layout=compact&langs_count=8&theme=tokyonight&border_radius=10"/>
+  <!-- Gráfico de Contribuciones -->
+  <img src="https://ghchart.rshah.org/MRDaniel04" alt="Gráfico de Contribuciones de MRDaniel04" />
+</p>
+
+<p align="center">
+  <!-- Insignias específicas del repositorio -->
+  <img src="https://img.shields.io/github/last-commit/MRDaniel04/MisPracticas?style=for-the-badge&logo=github&label=Último%20Commit" alt="Último Commit">
+  <img src="https://img.shields.io/github/repo-size/MRDaniel04/MisPracticas?style=for-the-badge&logo=github&label=Tamaño%20del%20Repo" alt="Tamaño del Repositorio">
 </p>
 
 ---
