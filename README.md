@@ -1,26 +1,56 @@
-# MisPracticas
+# Mis Prácticas 💻
 
-¡Bienvenido a mi repositorio! Aquí podrás encontrar una recopilación de las prácticas que he realizado durante mi etapa educativa. Este repositorio contiene ejemplos de mis trabajos previos en diferentes lenguajes de programación, que reflejan los conceptos y técnicas que he aprendido a lo largo de mi formación.
+¡Bienvenido! Este repositorio es un portafolio personal que recopila las prácticas y proyectos que he desarrollado durante mi formación como programador. Es un reflejo de mi evolución, aprendizaje y pasión por la tecnología.
 
-## Características
-
-- **Lenguajes utilizados**: C, Assembly, Prolog, Java, Python.
-- **Contenido**: Las prácticas incluyen ejercicios que abarcan tanto conceptos básicos como avanzados, representando una muestra de mi evolución y aprendizaje en el campo de la programación.
-- **Estructura**: El repositorio está organizado en carpetas por lenguaje de programación, facilitando la navegación y la visualización de cada trabajo según el lenguaje utilizado.
-
-## Descargar
-
-Si deseas explorar el repositorio, simplemente clónalo en tu máquina local utilizando el siguiente comando:
-
-git clone https://github.com/MRDaniel04/MisPracticas.git
-
-Una vez descargado, podrás navegar por los diferentes ejercicios y ver cómo fueron resueltos.
-
-## Contribuciones
-
-Este repositorio está pensado como una recopilación de mis trabajos previos, por lo que no está destinado a modificaciones externas. Sin embargo, si tienes alguna pregunta o comentario sobre las prácticas, no dudes en contactarme para discutir cualquier aspecto.
+<!-- Insignias (Badges) visuales para los lenguajes. Se ven mucho mejor que una simple lista. -->
+<p align="center">
+  <img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=c&logoColor=white" alt="C"/>
+  <img src="https://img.shields.io/badge/Assembly-6E4C13?style=for-the-badge&logo=nasm&logoColor=white" alt="Assembly"/>
+  <img src="https://img.shields.io/badge/Prolog-A90101?style=for-the-badge" alt="Prolog"/>
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java"/>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+</p>
 
 ---
 
-Gracias por visitar mi repositorio y espero que los ejercicios que comparto aquí te sirvan para conocer más sobre mi evolución como programador.
+## 📂 Estructura del Repositorio
 
+El repositorio está organizado en carpetas, una por cada lenguaje de programación. Puedes hacer clic en cualquiera de ellas para explorar los proyectos correspondientes.
+
+<!-- 
+  ¡IMPORTANTE!
+  Asegúrate de que los nombres de las carpetas (/C, /Assembly, etc.) coinciden con los de tu repositorio.
+  Si una carpeta tiene un nombre diferente, como "Practicas_C", cambia el enlace: [C](./Practicas_C).
+-->
+<div align="center">
+  <a href="./C"><strong>C</strong></a>    |   
+  <a href="./Assembly"><strong>Assembly</strong></a>    |   
+  <a href="./Prolog"><strong>Prolog</strong></a>    |   
+  <a href="./Java"><strong>Java</strong></a>    |   
+  <a href="./Python"><strong>Python</strong></a>
+</div>
+
+---
+
+## ✨ Estadísticas Dinámicas de GitHub
+
+Estas tarjetas se **actualizan automáticamente** y muestran las estadísticas de mi actividad y los lenguajes más utilizados en mi perfil de GitHub.
+
+<!--
+  Estas son las tarjetas dinámicas. Utilizan tu nombre de usuario (MRDaniel04).
+  Se actualizan solas cada 24 horas para reflejar tu nuevo trabajo. ¡No tienes que hacer nada!
+  Puedes cambiar el tema (theme) por otros como: dark, radical, merko, gruvbox, tokyonight.
+-->
+<p align="center">
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=MRDaniel04&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&border_radius=10"/>
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=MRDaniel04&layout=compact&langs_count=8&theme=tokyonight&border_radius=10"/>
+</p>
+
+---
+
+## 🚀 Cómo Empezar
+
+Si deseas explorar el código en tu máquina local, puedes clonar el repositorio con el siguiente comando:
+
+```bash
+git clone https://github.com/MRDaniel04/MisPracticas.git
