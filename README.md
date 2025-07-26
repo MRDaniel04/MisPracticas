@@ -30,16 +30,13 @@ El repositorio está organizado en carpetas, una por cada año de mi carrera. Pu
 
 ---
 
-## ✨ Tecnologías que Utilizo
+## ✨ Estadísticas del Proyecto
 
-Estas son algunas de las tecnologías y lenguajes con los que he trabajado en mis proyectos.
+Esta tarjeta se actualiza automáticamente y muestra un resumen de las estadísticas y tecnologías de este repositorio.
 
-<!-- Personaliza la lista añadiendo o quitando nombres en la URL: ?i=c,java,python,etc. -->
-<!-- Puedes cambiar el tema con &theme=light -->
+
 <p align="center">
-  <a href="https://skill-icons.dev">
-    <img src="https://skill-icons.dev/icons?i=c,assembly,prolog,java,python&theme=dark" />
-  </a>
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=MRDaniel04&repo=MisPracticas&theme=tokyonight&border_radius=10&show_icons=true" alt="Tarjeta del repositorio MisPracticas"/>
 </p>
 
 ---
