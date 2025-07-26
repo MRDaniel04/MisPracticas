@@ -15,7 +15,7 @@
 
 ## 📂 Estructura del Repositorio
 
-El repositorio está organizado en carpetas, una por cada lenguaje de programación. Puedes hacer clic en cualquiera de ellas para explorar los proyectos correspondientes.
+El repositorio está organizado en carpetas, una por cada año de mi carrera. Puedes hacer clic en cualquiera de ellas para explorar los proyectos correspondientes.
 
 <!-- 
   ¡IMPORTANTE!
@@ -23,11 +23,9 @@ El repositorio está organizado en carpetas, una por cada lenguaje de programaci
   Si una carpeta tiene un nombre diferente, como "Practicas_C", cambia el enlace: [C](./Practicas_C).
 -->
 <div align="center">
-  <a href="./C"><strong>C</strong></a>    |   
-  <a href="./Assembly"><strong>Assembly</strong></a>    |   
-  <a href="./Prolog"><strong>Prolog</strong></a>    |   
-  <a href="./Java"><strong>Java</strong></a>    |   
-  <a href="./Python"><strong>Python</strong></a>
+  <a href="./Grado_En_Ingenieria_Informatica/Curso_1"><strong>Curso1</strong></a>    |   
+  <a href="./Grado_En_Ingenieria_Informatica/Curso_2"><strong>Curso2</strong></a>    |   
+  <a href="./Grado_En_Ingenieria_Informatica/Curso_3"><strong>Curso3</strong></a>    |
 </div>
 
 ---
