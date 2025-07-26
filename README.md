@@ -30,19 +30,16 @@ El repositorio está organizado en carpetas, una por cada año de mi carrera. Pu
 
 ---
 
-## ✨ Actividad y Estadísticas del Proyecto
+## ✨ Tecnologías que Utilizo
 
-Aquí puedes ver mi gráfico de contribuciones de GitHub y algunas estadísticas que se actualizan automáticamente sobre este repositorio.
+Estas son algunas de las tecnologías y lenguajes con los que he trabajado en mis proyectos.
 
+<!-- Personaliza la lista añadiendo o quitando nombres en la URL: ?i=c,java,python,etc. -->
+<!-- Puedes cambiar el tema con &theme=light -->
 <p align="center">
-  <!-- Gráfico de Contribuciones -->
-  <img src="https://ghchart.rshah.org/MRDaniel04" alt="Gráfico de Contribuciones de MRDaniel04" />
-</p>
-
-<p align="center">
-  <!-- Insignias específicas del repositorio -->
-  <img src="https://img.shields.io/github/last-commit/MRDaniel04/MisPracticas?style=for-the-badge&logo=github&label=Último%20Commit" alt="Último Commit">
-  <img src="https://img.shields.io/github/repo-size/MRDaniel04/MisPracticas?style=for-the-badge&logo=github&label=Tamaño%20del%20Repo" alt="Tamaño del Repositorio">
+  <a href="https://skill-icons.dev">
+    <img src="https://skill-icons.dev/icons?i=c,assembly,prolog,java,python&theme=dark" />
+  </a>
 </p>
 
 ---
