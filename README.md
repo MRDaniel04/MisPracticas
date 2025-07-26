@@ -30,17 +30,6 @@ El repositorio está organizado en carpetas, una por cada año de mi carrera. Pu
 
 ---
 
-## ✨ Estadísticas del Proyecto
-
-Esta tarjeta se actualiza automáticamente y muestra un resumen de las estadísticas y tecnologías de este repositorio.
-
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=MRDaniel04&repo=MisPracticas&theme=tokyonight&border_radius=10&show_icons=true" alt="Tarjeta del repositorio MisPracticas"/>
-</p>
-
----
-
 ## 🚀 Cómo Empezar
 
 Si deseas explorar el código en tu máquina local, puedes clonar el repositorio con el siguiente comando:
