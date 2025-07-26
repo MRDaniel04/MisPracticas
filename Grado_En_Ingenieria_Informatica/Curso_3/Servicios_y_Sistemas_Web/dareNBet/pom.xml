@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>uva.ssw</groupId>
+    <artifactId>entrega</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>DareNBet</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Versión de Jakarta EE (Tomcat 10.1 usa Jakarta EE 10) -->
+        <jakartaee.api.version>10.0.0</jakartaee.api.version>
+        <!-- Versión de JSTL para Jakarta EE 10 -->
+        <jstl.api.version>3.0.0</jstl.api.version>
+        <jstl.impl.version>3.0.1</jstl.impl.version>
+        <!-- Versión de MariaDB Driver -->
+        <mariadb.driver.version>3.1.4</mariadb.driver.version> <!-- Mantienes la tuya o usa una más reciente si es compatible -->
+        <!-- Versiones de plugins de Maven -->
+        <maven.compiler.plugin.version>3.12.1</maven.compiler.plugin.version>
+        <maven.war.plugin.version>3.4.0</maven.war.plugin.version>
+        <!-- Versión de Java -->
+    </properties>
+
+    <dependencies>
+        <!-- ===== Jakarta EE API (Provided by Tomcat) ===== -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>${jakartaee.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- ===== JSTL (Necesario para tags como c:if, c:forEach) ===== -->
+        <!-- API de JSTL -->
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>${jstl.api.version}</version>
+            <!-- Scope default (compile) es correcto, se necesita en el WAR -->
+        </dependency>
+        <!-- Implementación de JSTL (GlassFish) -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>${jstl.impl.version}</version>
+            <!-- Scope default (compile) es correcto, se necesita en el WAR -->
+             <!-- Excluir API si causa conflictos (a veces pasa) -->
+             <exclusions>
+                <exclusion>
+                    <groupId>jakarta.servlet.jsp.jstl</groupId>
+                    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- ===== Driver JDBC (MariaDB) ===== -->
+        <dependency>
+           <groupId>org.mariadb.jdbc</groupId>
+           <artifactId>mariadb-java-client</artifactId>
+           <version>${mariadb.driver.version}</version>
+           <!-- Scope default (compile) es correcto, se necesita en el WAR -->
+        </dependency>
+
+        
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- ===== AÑADIDO: Dependencia para BCrypt (Hashing de Contraseñas) ===== -->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version> <!-- Versión estable común -->
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>${project.name}</finalName> <!-- Opcional: nombre del WAR final -->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven.war.plugin.version}</version>
+                 <configuration>
+                    <!-- Evita que Maven añada librerías del servidor al WAR si usas 'provided' -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml> <!-- Permite no tener web.xml si usas anotaciones -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

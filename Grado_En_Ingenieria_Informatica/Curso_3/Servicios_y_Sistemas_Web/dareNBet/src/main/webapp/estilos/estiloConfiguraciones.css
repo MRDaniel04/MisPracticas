@@ -1,0 +1,118 @@
+.config-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px; 
+}
+
+.config-block {
+    flex: 1; 
+    background-color: var(--color-fondo);
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.config-left, .config-center, .config-right {
+    min-width: 260px; 
+}
+
+.profile {
+    text-align: center;
+}
+
+.profile img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.profile ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.profile ul li {
+    margin: 15px 0;
+}
+
+.profile ul li a {
+    color: var(--color-boton);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.config-section {
+    margin-bottom: 25px;
+}
+
+.config-section h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: var(--color-texto);
+}
+
+.tema-selector {
+    display: flex;
+    flex-direction: column; 
+    gap: 5px;  
+}
+
+.input-intereses {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+button {
+    padding: 12px 25px;
+    background-color: var(--color-boton);
+    color: var(--color-texto);
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #34b0a5;
+}
+
+.config-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: var(--color-texto);
+}
+
+.config-section p {
+    font-size: 16px;
+    color: var(--color-texto);
+}
+
+.activity ul {
+    list-style: none; 
+    padding: 0;
+}
+
+.activity li {
+    margin-bottom: 5px;
+}
+
+.link-ver-mis-apuestas {
+  color: #39cb9c;          /* mismo verde del header */
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.link-ver-mis-apuestas:hover {
+  color: #2ea180;          /* verde más oscuro al pasar */
+  text-decoration: underline;
+}
+

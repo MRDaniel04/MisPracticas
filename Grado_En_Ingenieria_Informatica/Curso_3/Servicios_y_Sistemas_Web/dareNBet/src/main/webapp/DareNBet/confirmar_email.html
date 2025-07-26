@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Email</title>
+    <link href="../estilos/estilo.css" rel="stylesheet" type="text/css"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        main {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        #userEmail {
+            font-weight: bold;
+            color: #39cb9c;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #39cb9c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #34b0a5;
+        }
+
+        .volver-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #f4a261;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .volver-btn:hover {
+            background-color: #e47f3b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../../resources/dareNbet.png" alt="Logo"/>
+        </div>
+    </header>
+
+    <main>
+        <h2>Confirmar Email</h2>
+        <p>Te hemos enviado un correo a: <strong id="userEmail"></strong></p>
+        <p>Por favor, revisa tu bandeja de entrada y sigue las instrucciones para activar tu cuenta.</p>
+        <button>Reenviar Email</button>
+        <br>
+        <button class="volver-btn" onclick="window.location.href='inicio.html';">Volver al Inicio</button>
+    </main>
+
+</body>
+</html>

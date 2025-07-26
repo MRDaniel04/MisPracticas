@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/DareNBet">
+  <Resource auth="Container" 
+            driverClassName="org.mariadb.jdbc.Driver" 
+            factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" 
+            initialSize="10" 
+            jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer" jmxEnabled="true" logAbandoned="true" maxActive="100" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="10" name="jdbc/dareNbet" 
+            removeAbandoned="true" 
+            removeAbandonedTimeout="60" 
+            testOnBorrow="true" 
+            testOnReturn="false" 
+            testWhileIdle="true" 
+            timeBetweenEvictionRunsMillis="30000" 
+            type="javax.sql.DataSource" 
+            url="jdbc:mariadb://localhost:3306/dareNbet" 
+            username="root" 
+            password="root_db" 
+            validationInterval="30000" 
+            validationQuery="SELECT 1"/>
+</Context>

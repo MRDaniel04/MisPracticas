@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee                         https://jakarta.ee/xml/ns/jakartaee/web-app_4_0.xsd">
+    <!-- ========== SERVLETS Y JSPs “limpios” ========== -->
+    <servlet>
+        <servlet-name>ServletRegistro</servlet-name>
+        <servlet-class>uva.ssw.entrega.controlador.ServletRegistro</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletRanking</servlet-name>
+        <servlet-class>uva.ssw.entrega.controlador.ServletRanking</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletRegistro</servlet-name>
+        <url-pattern>/ServletRegistro</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletConfiguraciones</servlet-name>
+        <servlet-class>uva.ssw.entrega.controlador.ServletConfiguraciones</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletConfiguraciones</servlet-name>
+        <url-pattern>/configuraciones</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletCrearEntrada</servlet-name>
+        <servlet-class>uva.ssw.entrega.controlador.ServletCrearEntrada</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletCrearEntrada</servlet-name>
+        <url-pattern>/crearEntradaBlog</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletListarApuestas</servlet-name>
+        <servlet-class>uva.ssw.entrega.controlador.ServletListarApuestas</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletListarApuestas</servlet-name>
+        <url-pattern>/apuestas</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletBlog</servlet-name>
+        <servlet-class>uva.ssw.entrega.controlador.ServletBlog</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletBlog</servlet-name>
+        <url-pattern>/blog</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletReclamarCreditos</servlet-name>
+        <servlet-class>uva.ssw.entrega.controlador.ServletReclamarCreditos</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletReclamarCreditos</servlet-name>
+        <url-pattern>/reclamarCreditos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletRanking</servlet-name>
+        <url-pattern>/ranking</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- ========== WELCOME & ERRORES ========== -->
+    <servlet-mapping>
+        <servlet-name>ServletRanking</servlet-name>
+        <url-pattern>/ServletRanking</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>DareNBet/inicio.html</welcome-file>
+    </welcome-file-list>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error_404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error_500.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error_java.jsp</location>
+    </error-page>
+</web-app>

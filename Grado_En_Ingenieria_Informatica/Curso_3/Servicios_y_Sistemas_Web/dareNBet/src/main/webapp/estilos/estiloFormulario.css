@@ -1,0 +1,151 @@
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.form-container {
+    background-color: #2e2e2e;
+    padding: 30px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.form-container h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.form-container h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 4px;
+    background-color: #00c67f;
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 80%;
+    padding: 12px 40px 12px 40px;
+    background-color: #444;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00c67f;
+}
+
+.small-link {
+    color: #ccc;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.small-link a {
+    color: #00c67f;
+    text-decoration: none;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-register {
+    background-color: #00c67f;
+    color: white;
+}
+
+.btn-login {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+
+
+
+
+
+
+body.tema-oscuro main {
+    background-color: #1e1e1e;
+}
+
+body.tema-oscuro .form-container {
+    background-color: #2a2a2a;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+body.tema-oscuro .form-container h2 {
+    color: #f5f5f5;
+}
+
+body.tema-oscuro .form-container h2::after {
+    background-color: #39cb9c;
+}
+
+body.tema-oscuro .input-group input {
+    background-color: #3a3a3a;
+    color: #f5f5f5;
+}
+
+body.tema-oscuro .input-group i {
+    color: #39cb9c;
+}
+
+body.tema-oscuro .small-link {
+    color: #ccc;
+}
+
+body.tema-oscuro .small-link a {
+    color: #39cb9c;
+}
+
+body.tema-oscuro .btn-register {
+    background-color: #39cb9c;
+    color: white;
+}
+
+body.tema-oscuro .btn-login {
+    background-color: #444;
+    color: #f5f5f5;
+}
+
+body.tema-oscuro .btn:hover {
+    opacity: 0.85;
+}

@@ -1,0 +1,682 @@
+
+/* Estilo del cuerpo */
+main {
+    padding: 20px;
+    align-content: center;
+}
+
+.clasificador {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    text-align: center;
+}
+
+.crearCuenta{
+    font-size: 14px;
+}
+
+main .clasificador img {
+    width: 600px;
+    height: auto;
+}
+
+form {
+    align-items: center;
+    text-align: center;
+}
+
+.clasificador h2 {
+    color: #333;
+}
+
+/* Estilo del pie de página */
+footer {
+    background-color: #39cb9c;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer .contacto {
+    font-size: 14px;
+}
+
+footer .contacto h3 {
+    margin-bottom: 10px;
+}
+
+.votos {
+    text-align : left;
+    align-items: center;
+    border: 2px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+}
+
+.barra-estado {
+    width: 30%;
+    height: 10px;
+    background-color: #ddd;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* --------------------------------CSS PROPIO DE LOS POSTS ------------------------------------ */
+/* Estilo general */
+
+/* Contenedor general de posts */
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Cada post */
+.post {
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    background-color: #3ab06e ;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Contenedor superior: se divide en 2 secciones */
+.post-top {
+    display: flex;
+    width: 100%;
+    height: 50px;  /* Altura fija para el contenedor superior */
+    margin-bottom: 10px;
+}
+
+/* Contenedor para foto y nombre de usuario: usa grid con 25% y 75% */
+.user-container {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    align-items: center;
+    width: 9%;
+    padding: 5px;
+    background-color: #e6fed8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+/* Imagen de perfil */
+.perfil-img {
+    width: 100%;             /* Hace que la imagen ocupe el 100% del contenedor */
+    height: auto;            /* Mantiene la proporción original de la imagen */
+    max-width: 100%;         /* Asegura que no exceda el contenedor */
+    max-height: 100%;        /* Asegura que no se estire fuera del contenedor */
+    object-fit: cover;       /* Recorta la imagen para que ocupe el contenedor sin distorsionarse */
+    border-radius: 100%;      /* Redondea las esquinas (forma circular) */
+    background-color: #fff;
+    border: 1px solid #000;
+    overflow: hidden;        /* Evita que cualquier parte de la imagen sobresalga */
+}
+
+/* Nombre de usuario */
+.username {
+    font-weight: bold;
+    font-size: 12px;
+    padding-left: 3px;
+}
+
+/* Contenedor para el título: ocupa el 5/6 del ancho y centra su contenido */
+.title-container {
+    width: 89%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    background-color: #e6fed8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.post-title {
+    font-size: 18px;
+    margin: 0;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Contenedor para el contenido del post */
+.content-container {
+    width: 98.4%;  /* Ajuste para evitar desbordes */
+    height: 250px; /* 5 veces la altura del contenedor superior (50px x 5) */
+    padding: 10px;
+    background-color: #e6fed8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.post-content {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* -------------------------------------
+   NUEVO: Contenedor de acciones inferiores
+   Se reestructura en dos filas: 
+   - .actions-row: Like/Dislike y toggle
+   - .comments-container: Comentarios (desplegados o colapsados)
+   ------------------------------------- */
+.post-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 98.4%;
+    margin-top: 10px;
+}
+
+/* Primera fila: controles de acciones */
+.actions-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Panel de Like/Dislike usando símbolos */
+.likes-dislikes-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #e6fed8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    justify-content: center;
+}
+
+.like-button,
+.dislike-button {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+/* Contadores de likes/dislikes */
+.like-count,
+.dislike-count {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Contenedor para el botón toggle de comentarios */
+.toggle-container {
+    /* Puedes ajustar el estilo si lo deseas */
+}
+
+.toggle-comments {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #eee;
+    font-size: 14px;
+}
+
+/* Segunda fila: Contenedor de comentarios
+   Cuando está expandido, ocupa el ancho completo debajo de la fila de acciones */
+.comments-container {
+    width: 100%;
+    display: none;  /* Por defecto colapsado */
+}
+
+.comments-container.expanded {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* Lista de comentarios */
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background-color: #e6fed8;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.comment-username {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.comment-text {
+    font-size: 14px;
+    margin: 0;
+}
+
+/*Barra de búsqueda*/
+
+.search-container {
+    display: flex;
+    width: 70%;
+    max-width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border-radius: 5px;
+    margin-bottom: 20px; /* Espacio debajo de la barra de búsqueda */
+}
+
+.search-input {
+    width: 93%;         /* El input ocupa el 80% del ancho */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;      /* Evita el borde de enfoque por defecto */
+}
+
+.search-input:focus {
+    border-color: #39cb9c;  /* Color de borde cuando está enfocado */
+}
+
+.search-button {
+    padding: 10px 15px;
+    background-color: #39cb9c;  /* Color verde */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-button:hover {
+    background-color: #33b38f;  /* Color más oscuro cuando se pasa el ratón */
+}
+
+
+/*-------------BUTTON---------------*/
+
+
+/* Estilo para el botón de agregar nuevo post */
+.new-post-btn {
+    position: absolute;
+    top: 120px;  /* Justo debajo del menú de navegación */
+    right: 100px; /* A la derecha de la página */
+    background-color: #39cb9c;
+    color: white;
+    font-size: 30px;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.new-post-btn:hover {
+    background-color: #33b38f; /* Cambio de color cuando se pasa el ratón */
+}
+
+/* Estilo para el nuevo post */
+.new-post {
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    background-color: #e6fed8;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.new-post .post-title {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+.new-post .post-content {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.new-post .actions-row {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+/*Botón de comentarios*/
+
+/* Contenedor para el botón de comentarios */
+
+.right-actions {
+    display: flex;
+    gap: 10px; /* Espacio entre ambos botones */
+    align-items: center;
+}
+
+.comment-btn-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Espacio entre este botón y el toggle */
+}
+
+/* Botón de comentarios */
+.comment-button {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Efecto hover para el botón de comentarios */
+.comment-button:hover {
+    background-color: #b0bbb5;
+    color: white;
+}
+
+/*comentario en blanco*/
+
+.comment.empty-comment {
+    border: 1px dashed #ccc;
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    font-style: italic;
+    color: #999;
+}
+
+/* Si usas un input o textarea dentro */
+.comment.empty-comment input,
+.comment.empty-comment textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background-color: transparent;
+}
+
+.comments-container.empty {
+    display: block;
+}
+
+
+.comment-form-inline {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    margin-bottom: 15px; /* Espacio después del formulario de nuevo comentario */
+}
+.comment-form-inline .comment-input {
+    flex-grow: 1;
+    padding: 8px 10px; /* Ajuste de padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.comment-form-inline .submit-comment-btn {
+    padding: 8px 12px; /* Ajuste de padding */
+    background-color: #007bff; /* Color del botón */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.comment-form-inline .submit-comment-btn:hover {
+    background-color: #0056b3;
+}
+/* Estilos para un comentario individual */
+.comment {
+    border-top: 1px solid #eee; /* Separador entre comentarios */
+    padding: 10px 0;
+    margin-left: 20px; /* Indentación para comentarios */
+}
+.comment:first-child.new-comment-form { /* Evitar borde superior en el formulario de nuevo comentario */
+    border-top: none;
+    margin-left: 0; /* Sin indentación para el formulario de nuevo comentario */
+}
+.comment .comment-username {
+    font-weight: bold;
+    color: #333;
+    margin-right: 5px;
+}
+.comment .comment-text {
+    margin: 5px 0;
+    color: #555;
+    word-wrap: break-word; /* Para que el texto largo no rompa el layout */
+}
+.comment .comment-date {
+    display: block;
+    text-align: right;
+    font-size: 0.75em;
+    color: #888;
+    margin-top: 3px;
+}
+.no-comments-yet {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    padding: 15px 0;
+}
+
+
+
+
+
+
+/* ===== MODO OSCURO PARA POSTS (ej. en estilo de posts, búsqueda, nuevos posts, etc.) ===== */
+body.tema-oscuro {
+    background-color: #1f1f1f; /* Un fondo oscuro, pero algo más claro que negro puro */
+    color: #f5f5f5;
+}
+
+/* Elementos generales de la sección de posts */
+body.tema-oscuro .votos {
+    border-color: #39cb9c;
+}
+body.tema-oscuro .barra-estado {
+    background-color: #39cb9c;
+}
+
+/* Para cada post */
+body.tema-oscuro .post {
+    background: linear-gradient(145deg, #2a2a2a, #3a3a3a);
+    border: 1px solid #39cb9c;
+    box-shadow: 0 4px 6px rgba(57, 203, 156, 0.25);
+}
+
+body.tema-oscuro .user-container {
+    background-color: #2b2b2b;
+    border: 1px solid #39cb9c;
+}
+body.tema-oscuro .title-container {
+    background-color: #2b2b2b;
+    border: 1px solid #39cb9c;
+}
+body.tema-oscuro .content-container {
+    background-color: #2b2b2b;
+    border: 1px solid #39cb9c;
+}
+
+body.tema-oscuro .post-title,
+body.tema-oscuro .post-content {
+    color: #f5f5f5;
+}
+
+/* Sección de acciones y controles */
+body.tema-oscuro .post-actions {
+    background-color: #1f1f1f;
+}
+
+body.tema-oscuro .likes-dislikes-container {
+    background-color: #2a2a2a;
+    border: 1px solid #39cb9c;
+}
+
+body.tema-oscuro .like-button,
+body.tema-oscuro .dislike-button,
+body.tema-oscuro .toggle-comments {
+    border: 1px solid #39cb9c;
+    background-color: #2a2a2a;
+    color: #f5f5f5;
+}
+
+/* Contenedor y lista de comentarios */
+body.tema-oscuro .comments-container {
+    background-color: #2a2a2a;
+    border: 1px solid #39cb9c;
+    color: #f5f5f5;
+}
+
+body.tema-oscuro .comments-list {
+    background-color: #2a2a2a;
+    color: #f5f5f5;
+}
+
+/* Cada comentario */
+body.tema-oscuro .comment {
+    background-color: #333;
+    border: 1px solid #39cb9c;
+    color: #f5f5f5;
+}
+body.tema-oscuro .comment .comment-username {
+    color: #39cb9c;
+}
+body.tema-oscuro .comment .comment-text {
+    color: #f5f5f5;
+}
+
+/* Barra de búsqueda */
+body.tema-oscuro .search-container {
+    background-color: #2a2a2a;
+    border: 1px solid #39cb9c;
+}
+body.tema-oscuro .search-input {
+    background-color: #333;
+    border: 1px solid #39cb9c;
+    color: #f5f5f5;
+}
+body.tema-oscuro .search-input:focus {
+    border-color: #39cb9c;
+    box-shadow: 0 0 8px rgba(57, 203, 156, 0.3);
+}
+body.tema-oscuro .search-button {
+    background-color: #39cb9c;
+    border: 1px solid #39cb9c;
+    color: white;
+}
+
+/* Botón para nuevo post */
+body.tema-oscuro .new-post-btn {
+    background-color: #39cb9c;
+    box-shadow: 0 4px 6px rgba(57, 203, 156, 0.35);
+}
+
+/* Estilos para el nuevo post */
+body.tema-oscuro .new-post {
+    background-color: #2b2b2b;
+    border: 1px solid #39cb9c;
+    color: #f5f5f5;
+}
+body.tema-oscuro .new-post .post-title {
+    background-color: #333;
+    border: 1px solid #39cb9c;
+    color: #f5f5f5;
+}
+body.tema-oscuro .new-post .post-content {
+    background-color: #333;
+    border: 1px solid #39cb9c;
+    color: #f5f5f5;
+}
+
+/* Botón de comentarios */
+body.tema-oscuro .comment-button {
+    background-color: #2a2a2a;
+    border: 1px solid #39cb9c;
+    color: #f5f5f5;
+}
+body.tema-oscuro .comment-button:hover {
+    background-color: #39cb9c;
+    color: white;
+}
+
+/* Comentario 'vacío' o placeholder */
+body.tema-oscuro .comment.empty-comment {
+    background-color: #333;
+    border: 1px dashed #39cb9c;
+    color: #f5f5f5;
+}
+
+/* Formulario inline para comentario */
+body.tema-oscuro .comment-form-inline .comment-input {
+    background-color: #333;
+    border: 1px solid #39cb9c;
+    color: #f5f5f5;
+}
+body.tema-oscuro .comment-form-inline .submit-comment-btn {
+    background-color: #39cb9c;
+    border: 1px solid #39cb9c;
+    color: white;
+}
+body.tema-oscuro .comment-form-inline .submit-comment-btn:hover {
+    background-color: #33b38f;
+}
+
+
+/* Ajuste para que .clasificador también sea oscuro */
+body.tema-oscuro .clasificador {
+    background-color: #2a2a2a;
+}
+
+/* Formularios generales (crear post, inputs, etc.) */
+body.tema-oscuro input,
+body.tema-oscuro textarea,
+body.tema-oscuro select {
+    background-color: #333;
+    color: #f5f5f5;
+    border: 1px solid #39cb9c;
+}
+
+/* Placeholder para que no quede gris oscuro ilegible */
+body.tema-oscuro input::placeholder,
+body.tema-oscuro textarea::placeholder {
+    color: #bbb;
+}
